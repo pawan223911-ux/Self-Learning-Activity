@@ -1,0 +1,63 @@
+@model IEnumerable<StudentCourseRegistration.Models.Student>
+
+@{
+    ViewData["Title"] = "Student List";
+}
+
+<div class="page-heading">
+    <h1>Student List</h1>
+
+    <a class="btn primary" asp-action="Create">
+        Add Student
+    </a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="empty-state">
+        <h2>No Students Registered</h2>
+        <p>Please register your first student.</p>
+
+        <a class="btn primary" asp-action="Create">
+            Register Student
+        </a>
+    </div>
+}
+else
+{
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>Semester</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var student in Model)
+                {
+                    <tr>
+                        <td>@student.Id</td>
+                        <td>@student.Name</td>
+                        <td>@student.Email</td>
+                        <td>@student.Course</td>
+                        <td>@student.Semester</td>
+
+                        <td>
+                            <a class="text-link"
+                               asp-action="Details"
+                               asp-route-id="@student.Id">
+                                View Details
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
